@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Q15.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <p>&nbsp;</p>
+      <p><button type="button" class="btn btn-dark" id="fetchButton">Fetch</button></p>
+      
+      <p id="noResults"></p>
+      <table class="table table-striped">
+          <tbody id="results"></tbody>
+      </table>
+            
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous">
+	</script> 
+			  
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
+    <script>
+    	var url = "https://api.github.com/users/unipartdigital";
+    	
+		$( "#fetchButton" ).click(function() {
+		
+		    $('#noResults tbody').remove();
+		    $('#results tbody').remove();
+		
+			$.ajax({
+				crossOrigin: true,
+				url: url,
+				success: function(data) {
+					//console.log(data);
+					
+					var items = [];
+					$.each( data, function( key, val ) {
+					  //items.push( '<tr><td>' + key + '</td> <td>' + val '</td></tr>' );
+					  $('#results').append('<tr><td>' + key + '</td> <td>' + val + '</td></tr>' );
+					});
+				},
+				error: function() {
+					$('#noResults').append('No data found.' );
+				}
+			});
+		});
+    </script>
+  </body>
+</html>
+
